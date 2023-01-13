@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row py-3">
+    <div class="col-12">
+      <h1 class="fw-light">List of products</h1>
+    </div>
+  </div>
+  <div
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-5 mb-5"
+  >
+    <app-product-item
+      *ngFor="let product of products"
+      [productItem]="product"
+    ></app-product-item>
+  </div>
+</div>

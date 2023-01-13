@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row py-3">
+    <div class="col-12">
+      <h1 class="fw-light">My cart</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="products.length; else emptyCart" class="cart">
+      <div class="cart__item">
+        <div *ngFor="let product of products" class="cart-item">
+          <img class="" src="{{ product.url }}" />
+          <div class="cart-panel">
+            <div class="cart-detail fw-bold">{{ product.name }}</div>
+            <div class="cart-detail">
+              Price : {{ product.price | currency : "$" }}
+            </div>
+            <div class="cart-detail">
+              <select
+                #option
+                (change)="onChangeOption(option.value, product)"
+                style="width: 100px"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option
+                  *ngFor="let option of productCount"
+                  [ngValue]="option"
+                  [selected]="product.amount === option"
+                >
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+            <div class="cart-detail">
+              <button (click)="removeItem(product.id)" class="btn btn-danger">
+                <i class="bi bi-trash-fill"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="cart-item">
+          <b>Total Price: {{ totalPrice | currency : "$" }}</b>
+        </div>
+      </div>
+      <div>
+        <app-user-info (onCheckoutSuccess)="onSubmit($event)"></app-user-info>
+      </div>
+    </div>
+    <ng-template #emptyCart>
+      <div class="warning-message">
+        <p>
+          Cart is empty! Please, return on
+          <a routerLink="/"> product list </a> to add product.
+        </p>
+      </div>
+    </ng-template>
+  </div>
+</div>

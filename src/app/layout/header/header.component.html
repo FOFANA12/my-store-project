@@ -1,0 +1,34 @@
+<header class="header bg-primary text-white">
+  <div class="px-3 py-2">
+    <div class="container">
+      <div
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+      >
+        <span
+          class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none fs-4"
+        >
+          {{ title }}
+          <br />
+          Total cart : {{ total | currency : "$" }}
+        </span>
+
+        <ul
+          class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small"
+        >
+          <li>
+            <a href="/" class="nav-link text-white">
+              <i class="bi bi-grid d-block mx-auto mb-1 text-center icon"></i>
+              Products List
+            </a>
+          </li>
+          <li>
+            <a routerLink="cart" class="nav-link text-white">
+              <i class="bi bi-table d-block mx-auto mb-1 text-center icon"></i>
+              My Cart <span class="fw-bold"> ({{ products.length }}) </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

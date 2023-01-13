@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row py-3">
+    <div class="col-12">
+      <h1 class="fw-light">Detail product #{{ id }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="product" class="detail-container">
+      <div class="product-item">
+        <img class="product-item__image" src="{{ product.url }}" />
+        <div class="product-item__info">
+          <h2>{{ product.name }}</h2>
+          <p class="product-item__description">{{ product.description }}</p>
+          <p class="price">Price : {{ product.price | currency : "$" }}</p>
+          <form (ngSubmit)="addProductToCart(product)" class="d-inline">
+            <span class="me-2">Amount:</span>
+            <select
+              [(ngModel)]="selectedOption"
+              style="width: 100px"
+              class="product-item-detail form-select d-inline"
+              (ngModelChange)="onChangeOption($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option value="">-</option>
+              <option *ngFor="let value of productCount" value="{{ value }}">
+                {{ value }}
+              </option>
+            </select>
+            <br />
+            <button type="submit" class="btn-add btn btn-primary mt-4">
+              <i class="bi bi-cart-plus"></i> Add to Cart
+            </button>
+          </form>
+          <button
+            (click)="removeItem(product.id)"
+            class="btn btn-danger mt-4 ms-4"
+            *ngIf="existInCart"
+          >
+            <i class="bi bi-trash-fill"></i> Remove
+          </button>
+          <div class="back__link">
+            <a class="back-button" routerLink="/">
+              <i class="bi bi-arrow-left-circle"></i> Back to product list</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
